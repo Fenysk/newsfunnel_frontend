@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsfunnel_frontend/features/auth/3_presentation/bloc/auth.cubit.dart';
 import 'package:newsfunnel_frontend/features/auth/3_presentation/bloc/auth.state.dart';
 import 'package:newsfunnel_frontend/features/auth/3_presentation/page/auth.page.dart';
-import 'package:newsfunnel_frontend/features/skeleton/3_presentation/page/authenticated.page.dart';
+import 'package:newsfunnel_frontend/features/skeleton/3_presentation/page/authenticated-layout.page.dart';
 
 class SkeletonPage extends StatelessWidget {
   const SkeletonPage({super.key});
@@ -51,7 +51,7 @@ class SkeletonPage extends StatelessWidget {
     return Builder(
       builder: (context) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => const AuthenticatedPage()));
+          Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => const AuthenticatedLayoutPage()));
         });
         return Container();
       },

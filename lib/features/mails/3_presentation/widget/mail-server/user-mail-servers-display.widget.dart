@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newsfunnel_frontend/features/mails/3_presentation/bloc/user-mail-servers-display.cubit.dart';
-import 'package:newsfunnel_frontend/features/mails/3_presentation/bloc/user-mail-servers-display.state.dart';
+import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/bloc/user-mail-servers-display.cubit.dart';
+import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/bloc/user-mail-servers-display.state.dart';
+import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/mail-server-card.widget.dart';
 
 class UserMailServersDisplayWidget extends StatelessWidget {
   const UserMailServersDisplayWidget({super.key});
@@ -46,6 +47,11 @@ class UserMailServersDisplayWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
+            for (final mailServer in state.mailServers)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: MailServerCardWidget(mailServer: mailServer),
+              ),
           ],
         ),
       );

@@ -5,7 +5,7 @@ import 'package:newsfunnel_frontend/core/widgets/loading-button/bloc/loading-but
 import 'package:newsfunnel_frontend/core/widgets/loading-button/custom-loading-button.widget.dart';
 import 'package:newsfunnel_frontend/features/auth/1_data/dto/login.request.dart';
 import 'package:newsfunnel_frontend/features/auth/2_domain/usecase/login.usecase.dart';
-import 'package:newsfunnel_frontend/features/skeleton/3_presentation/page/authenticated.page.dart';
+import 'package:newsfunnel_frontend/features/skeleton/3_presentation/page/authenticated-layout.page.dart';
 import 'package:newsfunnel_frontend/service_locator.dart';
 
 class LoginTab extends StatelessWidget {
@@ -26,7 +26,7 @@ class LoginTab extends StatelessWidget {
       child: BlocListener<LoadingButtonCubit, LoadingButtonState>(
         listener: (context, state) {
           if (state is LoadingButtonSuccessState) {
-            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => const AuthenticatedPage()));
+            Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => const AuthenticatedLayoutPage()));
           }
 
           if (state is LoadingButtonFailureState) {

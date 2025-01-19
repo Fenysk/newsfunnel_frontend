@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:newsfunnel_frontend/features/auth/3_presentation/bloc/auth.cubit.dart';
 import 'package:newsfunnel_frontend/features/mails/1_data/repository/mails.repository-impl.dart';
 import 'package:newsfunnel_frontend/features/mails/1_data/source/mails-api.service.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/repository/mails.repository.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mails-from-address.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-user-mail-servers.usecase.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/repository/users.repository-impl.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/source/user-local.service.dart';
@@ -34,6 +36,9 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton<ExempleRepository>(ExempleRepositoryImpl());
   serviceLocator.registerSingleton<GetExempleUsecase>(GetExempleUsecase());
 
+  //// Cubit
+  serviceLocator.registerSingleton(() => AuthCubit());
+
   //// Network
   serviceLocator.registerSingleton<DioClient>(DioClient());
 
@@ -58,4 +63,5 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton<LogoutUsecase>(LogoutUsecase());
   serviceLocator.registerSingleton<LoginUsecase>(LoginUsecase());
   serviceLocator.registerSingleton<GetUserMailServersUsecase>(GetUserMailServersUsecase());
+  serviceLocator.registerSingleton<GetMailsFromAddressUsecase>(GetMailsFromAddressUsecase());
 }
