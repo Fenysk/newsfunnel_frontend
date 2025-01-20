@@ -62,4 +62,14 @@ class MailsRepositoryImpl extends MailsRepository {
       },
     );
   }
+
+  @override
+  Future<Either> deleteMail(String mailId) async {
+    Either result = await serviceLocator<MailsApiService>().deleteMail(mailId);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) => Right(data),
+    );
+  }
 }

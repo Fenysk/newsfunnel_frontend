@@ -16,7 +16,7 @@ class MailResumeCardWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           CupertinoPageRoute(
-            builder: (context) => MailDetailPage(mail: mail),
+            builder: (_) => MailDetailPage(mail: mail),
           ),
         );
       },

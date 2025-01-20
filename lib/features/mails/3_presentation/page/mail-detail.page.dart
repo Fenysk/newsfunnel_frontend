@@ -1,8 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-details/mail-details.cubit.dart';
+import 'package:newsfunnel_frontend/service_locator.dart';
 
 class MailDetailPage extends StatelessWidget {
   final MailEntity mail;
@@ -27,9 +30,13 @@ class MailDetailPage extends StatelessWidget {
           CupertinoActionSheetAction(
             isDestructiveAction: true,
             child: const Text('Delete'),
-            onPressed: () {
-              Navigator.pop(context);
-              // Add delete logic here
+            onPressed: () async {
+              Either result = await serviceLocator<DeleteMailUsecase>().execute(request: mail.id);
+              if (result.isRight()) {
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
+              }
             },
           ),
         ],
