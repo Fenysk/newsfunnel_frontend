@@ -52,11 +52,19 @@ class UserMailsFromAddressWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            for (final mail in state.mails)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: MailResumeCardWidget(mail: mail),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    for (final mail in state.mails)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: MailResumeCardWidget(mail: mail),
+                      ),
+                  ],
+                ),
               ),
+            ),
           ],
         ),
       );

@@ -5,7 +5,7 @@ class MailEntity {
   final String from;
   final String to;
   final String? subject;
-  final String body;
+  final String? body;
   final DateTime createdAt;
   final String mailServerId;
   final MailMetadataEntity? metadata;
@@ -15,7 +15,7 @@ class MailEntity {
     required this.from,
     required this.to,
     required this.subject,
-    required this.body,
+    this.body,
     required this.createdAt,
     required this.mailServerId,
     required this.metadata,

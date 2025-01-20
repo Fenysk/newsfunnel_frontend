@@ -27,52 +27,24 @@ class MailServerClickableList extends StatelessWidget {
 
   Widget buildFailureContent(UserMailServersDisplayFailure state) => Center(child: Text(state.errorMessage));
 
-  Widget _buildTitle() {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Text(
-        'Your mailboxes',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
   Widget buildLoadedContent(BuildContext context, UserMailServersDisplayLoaded state) {
-    if (state.mailServers.isEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildTitle(),
-          const SizedBox(height: 16),
-          const Text('No mail servers found for you'),
-        ],
-      );
-    }
-
-    return Column(
-      children: [
-        _buildTitle(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: state.mailServers.length,
-            itemBuilder: (context, index) {
-              final mailServer = state.mailServers[index];
-              return CupertinoListTile(
-                title: Text(mailServer.name),
-                subtitle: Text(mailServer.name),
-                trailing: const CupertinoListTileChevron(),
-                onTap: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(
-                      builder: (_) => MailboxPage(emailAddress: mailServer.user),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        ),
-      ],
+    return ListView.builder(
+      itemCount: state.mailServers.length,
+      itemBuilder: (context, index) {
+        final mailServer = state.mailServers[index];
+        return CupertinoListTile(
+          title: Text(mailServer.name),
+          subtitle: Text(mailServer.name),
+          trailing: const CupertinoListTileChevron(),
+          onTap: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (_) => MailboxPage(emailAddress: mailServer.user),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

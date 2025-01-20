@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/page/home.page.dart';
 import 'package:newsfunnel_frontend/features/user/3_presentation/page/profile.page.dart';
 
-class AuthenticatedLayoutPage extends StatelessWidget {
-  const AuthenticatedLayoutPage({super.key});
+class AuthenticatedPage extends StatelessWidget {
+  const AuthenticatedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +36,22 @@ class NavigatorWidget extends StatelessWidget {
       tabBuilder: (context, index) {
         return CupertinoTabView(
           builder: (context) {
-            return SafeArea(
-              child: Navigator(
-                initialRoute: '/',
-                onGenerateRoute: (RouteSettings settings) {
-                  Widget page;
-                  switch (index) {
-                    case 1:
-                      page = const ProfilePage();
-                      break;
-                    default:
-                      page = const HomePage();
-                  }
-                  return CupertinoPageRoute(
-                    settings: settings,
-                    builder: (_) => page,
-                  );
-                },
-              ),
+            return Navigator(
+              initialRoute: '/',
+              onGenerateRoute: (RouteSettings settings) {
+                Widget page;
+                switch (index) {
+                  case 1:
+                    page = const ProfilePage();
+                    break;
+                  default:
+                    page = const HomePage();
+                }
+                return CupertinoPageRoute(
+                  settings: settings,
+                  builder: (_) => page,
+                );
+              },
             );
           },
         );

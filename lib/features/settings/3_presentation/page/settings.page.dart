@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/user-mail-servers-display.widget.dart';
+import 'package:newsfunnel_frontend/features/settings/3_presentation/widgets/add-server-sheet.widget.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -13,6 +14,11 @@ class SettingsPage extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
           middle: const Text('Settings'),
+          trailing: CupertinoButton(
+            padding: EdgeInsets.zero,
+            onPressed: () => AddServerSheetWidget().show(context),
+            child: const Icon(CupertinoIcons.add),
+          ),
         ),
         const UserMailServersDisplayWidget(),
       ],

@@ -7,7 +7,7 @@ class MailModel {
   final String from;
   final String to;
   final String? subject;
-  final String body;
+  final String? body;
   final DateTime createdAt;
   final String mailServerId;
   final MailMetadataModel? metadata;
@@ -17,7 +17,7 @@ class MailModel {
     required this.from,
     required this.to,
     required this.subject,
-    required this.body,
+    this.body,
     required this.createdAt,
     required this.mailServerId,
     required this.metadata,
@@ -29,7 +29,7 @@ class MailModel {
       from: map['from'] as String,
       to: map['to'] as String,
       subject: map['subject'] as String?,
-      body: map['body'] as String,
+      body: map['body'] as String?,
       createdAt: DateTime.parse(map['createdAt'] as String),
       mailServerId: map['mailServerId'] as String,
       metadata: map['Metadata'] != null ? MailMetadataModel.fromMap(map['Metadata'] as Map<String, dynamic>) : null,
