@@ -8,6 +8,7 @@ import 'package:newsfunnel_frontend/service_locator.dart';
 abstract class MailsApiService {
   Future<Either> getUserMailServers();
   Future<Either> getMailsFromAddress(String emailAddress);
+  Future<Either> getMailDetails(String mailId);
 }
 
 class MailsApiServiceImpl extends MailsApiService {
@@ -39,6 +40,27 @@ class MailsApiServiceImpl extends MailsApiService {
 
       final response = await serviceLocator<DioClient>().get(
         '${ApiUrls.getMailsFromAddress}/$emailAddress',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+          },
+        ),
+      );
+
+      return Right(response);
+    } on DioException catch (error) {
+      if (error.response != null) return Left(error.response!.data['message']);
+      return Left(error.message);
+    }
+  }
+
+  @override
+  Future<Either> getMailDetails(String mailId) async {
+    try {
+      final accessToken = await serviceLocator<AuthLocalService>().getAccessToken();
+
+      final response = await serviceLocator<DioClient>().get(
+        '${ApiUrls.getMailDetails}/$mailId',
         options: Options(
           headers: {
             'Authorization': 'Bearer $accessToken',

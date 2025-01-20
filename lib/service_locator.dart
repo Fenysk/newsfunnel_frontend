@@ -3,6 +3,7 @@ import 'package:newsfunnel_frontend/features/auth/3_presentation/bloc/auth.cubit
 import 'package:newsfunnel_frontend/features/mails/1_data/repository/mails.repository-impl.dart';
 import 'package:newsfunnel_frontend/features/mails/1_data/source/mails-api.service.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/repository/mails.repository.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mail-details.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mails-from-address.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-user-mail-servers.usecase.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/repository/users.repository-impl.dart';
@@ -64,4 +65,5 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton<LoginUsecase>(LoginUsecase());
   serviceLocator.registerSingleton<GetUserMailServersUsecase>(GetUserMailServersUsecase());
   serviceLocator.registerSingleton<GetMailsFromAddressUsecase>(GetMailsFromAddressUsecase());
+  serviceLocator.registerSingleton<GetMailDetailsUsecase>(GetMailDetailsUsecase());
 }

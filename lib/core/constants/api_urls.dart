@@ -18,4 +18,5 @@ class ApiUrls {
   // Mails
   static String get getUserMailServers => '$baseUrl/mails/getUserMailServers';
   static String get getMailsFromAddress => '$baseUrl/mails/fetch-all';
+  static String get getMailDetails => '$baseUrl/mails/get-details';
 }
