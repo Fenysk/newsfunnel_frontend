@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:newsfunnel_frontend/features/mails/1_data/model/mail-metadata.model.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
 
 class MailModel {
@@ -8,9 +7,9 @@ class MailModel {
   final String to;
   final String? subject;
   final String? body;
+  final String? markdownSummary;
   final DateTime createdAt;
   final String mailServerId;
-  final MailMetadataModel? metadata;
 
   MailModel({
     required this.id,
@@ -18,9 +17,9 @@ class MailModel {
     required this.to,
     required this.subject,
     this.body,
+    this.markdownSummary,
     required this.createdAt,
     required this.mailServerId,
-    required this.metadata,
   });
 
   factory MailModel.fromMap(Map<String, dynamic> map) {
@@ -30,9 +29,9 @@ class MailModel {
       to: map['to'] as String,
       subject: map['subject'] as String?,
       body: map['body'] as String?,
+      markdownSummary: map['markdownSummary'] as String?,
       createdAt: DateTime.parse(map['createdAt'] as String),
       mailServerId: map['mailServerId'] as String,
-      metadata: map['Metadata'] != null ? MailMetadataModel.fromMap(map['Metadata'] as Map<String, dynamic>) : null,
     );
   }
 
@@ -43,9 +42,9 @@ class MailModel {
       'to': to,
       'subject': subject,
       'body': body,
+      'markdownSummary': markdownSummary,
       'createdAt': createdAt.toIso8601String(),
       'mailServerId': mailServerId,
-      'Metadata': metadata?.toMap(),
     };
   }
 
@@ -61,8 +60,8 @@ extension MailModelExtension on MailModel {
         to: to,
         subject: subject,
         body: body,
+        markdownSummary: markdownSummary,
         createdAt: createdAt,
         mailServerId: mailServerId,
-        metadata: metadata?.toEntity(),
       );
 }

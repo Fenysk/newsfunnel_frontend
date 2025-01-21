@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/page/home.page.dart';
 import 'package:newsfunnel_frontend/features/user/3_presentation/page/profile.page.dart';
+import 'package:newsfunnel_frontend/core/constants/app-icons.constants.dart';
 
 class AuthenticatedLayoutPage extends StatelessWidget {
   const AuthenticatedLayoutPage({super.key});
@@ -22,13 +23,13 @@ class NavigatorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.mail),
+            icon: Icon(AppIcons.mail),
             label: 'Mails',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.person),
+            icon: Icon(AppIcons.person),
             label: 'Profile',
           ),
         ],

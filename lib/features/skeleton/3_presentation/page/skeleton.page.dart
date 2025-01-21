@@ -29,7 +29,7 @@ class SkeletonPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Threads'),
+            Text('Newsfunnel'),
             SizedBox(height: 16),
             CupertinoActivityIndicator(),
           ],
