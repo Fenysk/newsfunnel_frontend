@@ -122,13 +122,16 @@ class _MailDetailPageState extends State<MailDetailPage> {
           onPressed: onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: CupertinoTheme.of(context).primaryColor,
+              Flexible(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: CupertinoTheme.of(context).primaryColor,
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -152,7 +155,6 @@ class _MailDetailPageState extends State<MailDetailPage> {
     final List<String> quotes = widget.mail.markdownSummary != null ? MarkdownUtil.getImportantQuotes(widget.mail.markdownSummary!) : [];
     final List<Map<String, String>> notes = widget.mail.markdownSummary != null ? MarkdownUtil.getAdditionalNotes(widget.mail.markdownSummary!) : [];
 
-    // Initialize section expansion states if not already done
     for (var section in sections) {
       for (var entry in section.entries) {
         if (!_sectionExpanded.containsKey(entry.key)) {
@@ -169,6 +171,14 @@ class _MailDetailPageState extends State<MailDetailPage> {
             title ?? widget.mail.subject ?? '(No subject)',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: CupertinoTheme.of(context).textTheme.textStyle.color),
             textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 32),
+        Text(
+          'From: ${widget.mail.from}',
+          style: TextStyle(
+            fontSize: 12,
+            color: CupertinoTheme.of(context).textTheme.textStyle.color?.withOpacity(0.6),
           ),
         ),
         const SizedBox(height: 16),
@@ -265,12 +275,15 @@ class _MailDetailPageState extends State<MailDetailPage> {
                                   padding: EdgeInsets.zero,
                                   onPressed: () => setState(() => _sectionExpanded[entry.key] = !(_sectionExpanded[entry.key] ?? true)),
                                   child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        entry.key,
-                                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: CupertinoTheme.of(context).primaryContrastingColor),
+                                      Expanded(
+                                        child: Text(
+                                          entry.key,
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: CupertinoTheme.of(context).primaryContrastingColor),
+                                        ),
                                       ),
-                                      const SizedBox(width: 8),
+                                      const SizedBox(width: 32),
                                       Icon(
                                         _sectionExpanded[entry.key] ?? true ? AppIcons.down : AppIcons.right,
                                         size: 16,

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:newsfunnel_frontend/core/constants/app-icons.constants.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/page/mail-detail.page.dart';
 import 'package:newsfunnel_frontend/core/utils/markdown.util.dart';
@@ -43,41 +44,66 @@ class MailResumeCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
-                              width: 8,
-                              height: 8,
-                              margin: const EdgeInsets.only(right: 4),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: !mail.isRead ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
+                            if (!mail.isRead)
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                margin: const EdgeInsets.only(right: 8),
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.activeBlue.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: CupertinoColors.activeBlue,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                  'New',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: CupertinoColors.activeBlue,
+                                  ),
+                                ),
                               ),
-                            ),
                             Container(
-                              width: 8,
-                              height: 8,
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               margin: const EdgeInsets.only(right: 8),
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: mail.markdownSummary != null ? CupertinoColors.activeGreen : CupertinoColors.systemGrey,
+                                color: mail.markdownSummary != null ? CupertinoColors.activeGreen.withOpacity(0.1) : CupertinoColors.systemGrey.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: mail.markdownSummary != null ? CupertinoColors.activeGreen : CupertinoColors.systemGrey,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    mail.markdownSummary != null ? AppIcons.summarized : AppIcons.notSummarized,
+                                    size: 14,
+                                    color: mail.markdownSummary != null ? CupertinoColors.activeGreen : CupertinoColors.systemGrey,
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                        Expanded(
-                          child: Text(
-                            title ?? mail.subject ?? '(No subject)',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: mail.isRead ? FontWeight.normal : FontWeight.bold,
-                              color: CupertinoTheme.of(context).textTheme.textStyle.color,
-                            ),
-                            overflow: TextOverflow.ellipsis,
+                        const SizedBox(height: 8),
+                        Text(
+                          title ?? mail.subject ?? '(No subject)',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: mail.isRead ? FontWeight.normal : FontWeight.bold,
+                            color: CupertinoTheme.of(context).textTheme.textStyle.color,
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                       ],
                     ),
