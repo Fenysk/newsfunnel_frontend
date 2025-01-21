@@ -6,6 +6,7 @@ import 'package:newsfunnel_frontend/features/mails/1_data/source/mails-api.servi
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail-server.entity.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/repository/mails.repository.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/dto/link-mail-server.request.dart';
 import 'package:newsfunnel_frontend/service_locator.dart';
 
 class MailsRepositoryImpl extends MailsRepository {
@@ -112,6 +113,16 @@ class MailsRepositoryImpl extends MailsRepository {
   @override
   Future<Either> unlinkMailServer(String emailAddress) async {
     Either result = await serviceLocator<MailsApiService>().unlinkMailServer(emailAddress);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) => Right(data),
+    );
+  }
+
+  @override
+  Future<Either> linkMailServer(LinkMailServerRequest linkMailServerRequest) async {
+    Either result = await serviceLocator<MailsApiService>().linkMailServer(linkMailServerRequest);
 
     return result.fold(
       (error) => Left(error),

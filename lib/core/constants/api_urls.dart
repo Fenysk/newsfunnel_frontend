@@ -22,5 +22,6 @@ class ApiUrls {
   static String get deleteMail => '$baseUrl/mails/delete';
   static String get markMailReadState => '$baseUrl/mails/mark-read';
   static String get generateSummary => '$baseUrl/mails/generate-summary';
+  static String get linkMailServer => '$baseUrl/mails/link';
   static String get unlinkMailServer => '$baseUrl/mails/unlink';
 }

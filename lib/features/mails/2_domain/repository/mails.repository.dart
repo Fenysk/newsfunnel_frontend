@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/dto/link-mail-server.request.dart';
 
 abstract class MailsRepository {
   Future<Either> getUserMailServers();
@@ -8,4 +9,5 @@ abstract class MailsRepository {
   Future<Either> markMailReadState(String mailId, bool isRead);
   Future<Either> generateSummary(String mailId);
   Future<Either> unlinkMailServer(String emailAddress);
+  Future<Either> linkMailServer(LinkMailServerRequest linkMailServerRequest);
 }

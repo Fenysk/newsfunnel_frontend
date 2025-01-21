@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/dto/link-mail-server.request.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/link-mail-server.usecase.dart';
+import 'package:newsfunnel_frontend/service_locator.dart';
 
 class AddServerSheetWidget extends StatefulWidget {
   const AddServerSheetWidget({super.key});
@@ -136,9 +139,20 @@ class _AddServerFormState extends State<_AddServerForm> {
                 child: const Text('Cancel'),
               ),
               CupertinoButton.filled(
-                onPressed: () {
-                  // TODO: Handle save
-                  Navigator.pop(context);
+                onPressed: () async {
+                  final request = LinkMailServerRequest(
+                    name: widget.nameController.text,
+                    user: widget.userController.text,
+                    password: widget.passwordController.text,
+                    host: widget.hostController.text,
+                    port: int.parse(widget.portController.text),
+                    tls: widget.tls,
+                  );
+
+                  await serviceLocator<LinkMailServerUsecase>().execute(request: request);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
                 },
                 child: const Text('Save'),
               ),
