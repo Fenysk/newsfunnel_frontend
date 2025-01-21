@@ -45,14 +45,28 @@ class MailResumeCardWidget extends StatelessWidget {
                   Expanded(
                     child: Row(
                       children: [
-                        Container(
-                          width: 8,
-                          height: 8,
-                          margin: const EdgeInsets.only(right: 8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: !mail.isRead ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 8,
+                              height: 8,
+                              margin: const EdgeInsets.only(right: 4),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: !mail.isRead ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
+                              ),
+                            ),
+                            Container(
+                              width: 8,
+                              height: 8,
+                              margin: const EdgeInsets.only(right: 8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: mail.markdownSummary != null ? CupertinoColors.activeGreen : CupertinoColors.systemGrey,
+                              ),
+                            ),
+                          ],
                         ),
                         Expanded(
                           child: Text(

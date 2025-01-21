@@ -11,6 +11,7 @@ abstract class MailsApiService {
   Future<Either> getMailDetails(String mailId);
   Future<Either> deleteMail(String mailId);
   Future<Either> markMailReadState(String mailId, bool isRead);
+  Future<Either> generateSummary(String mailId);
 }
 
 class MailsApiServiceImpl extends MailsApiService {
@@ -105,6 +106,27 @@ class MailsApiServiceImpl extends MailsApiService {
 
       final response = await serviceLocator<DioClient>().post(
         '${ApiUrls.markMailReadState}/$mailId/$isRead',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+          },
+        ),
+      );
+
+      return Right(response);
+    } on DioException catch (error) {
+      if (error.response != null) return Left(error.response!.data['message']);
+      return Left(error.message);
+    }
+  }
+
+  @override
+  Future<Either> generateSummary(String mailId) async {
+    try {
+      final accessToken = await serviceLocator<AuthLocalService>().getAccessToken();
+
+      final response = await serviceLocator<DioClient>().post(
+        '${ApiUrls.generateSummary}/$mailId',
         options: Options(
           headers: {
             'Authorization': 'Bearer $accessToken',

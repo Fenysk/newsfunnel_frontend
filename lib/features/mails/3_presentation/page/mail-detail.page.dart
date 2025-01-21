@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/cupertino.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.usecase.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/generate-summary.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/mark-mail-read-state.usecase.dart';
 import 'package:newsfunnel_frontend/service_locator.dart';
 import 'package:newsfunnel_frontend/core/utils/markdown.util.dart';
@@ -50,10 +51,20 @@ class _MailDetailPageState extends State<MailDetailPage> {
       builder: (BuildContext context) => CupertinoActionSheet(
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
-            child: const Text('Settings'),
-            onPressed: () {
+            child: const Text('Generate Summary'),
+            onPressed: () async {
               Navigator.pop(context);
-              // Add settings navigation logic here
+              Either result = await serviceLocator<GenerateSummaryUsecase>().execute(request: widget.mail.id);
+              if (result.isRight()) {
+                if (context.mounted) {
+                  Navigator.pushReplacement(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => MailDetailPage(mail: result.getOrElse(() => null)),
+                    ),
+                  );
+                }
+              }
             },
           ),
           CupertinoActionSheetAction(
@@ -161,6 +172,33 @@ class _MailDetailPageState extends State<MailDetailPage> {
           ),
         ),
         const SizedBox(height: 16),
+        if (widget.mail.markdownSummary != null) ...[
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: MarkdownUtil.getKeywords(widget.mail.markdownSummary!).map((keyword) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: CupertinoTheme.of(context).primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: CupertinoTheme.of(context).primaryColor.withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+                child: Text(
+                  keyword,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: CupertinoTheme.of(context).primaryColor,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 16),
+        ],
         _buildExpandableSection(
           title: 'Summary',
           isExpanded: _isSummaryExpanded,

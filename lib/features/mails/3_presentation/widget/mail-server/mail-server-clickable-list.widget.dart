@@ -60,7 +60,7 @@ class MailServerClickableList extends StatelessWidget {
               final mailServer = state.mailServers[index];
               return CupertinoListTile(
                 title: Text(mailServer.name),
-                subtitle: Text(mailServer.name),
+                subtitle: Text(mailServer.user),
                 trailing: Icon(AppIcons.right),
                 onTap: () {
                   Navigator.of(context).push(

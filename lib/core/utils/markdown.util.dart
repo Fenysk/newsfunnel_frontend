@@ -1,6 +1,6 @@
 class MarkdownUtil {
   static List<String> getKeywords(String markdown) {
-    final RegExp keywordRegex = RegExp(r'#(\w+)');
+    final RegExp keywordRegex = RegExp(r'(?<!#)#([^\s#]+)');
     final matches = keywordRegex.allMatches(markdown);
     return matches.map((m) => m.group(1) ?? '').toList();
   }

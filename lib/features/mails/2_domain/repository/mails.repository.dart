@@ -6,4 +6,5 @@ abstract class MailsRepository {
   Future<Either> getMailDetails(String mailId);
   Future<Either> deleteMail(String mailId);
   Future<Either> markMailReadState(String mailId, bool isRead);
+  Future<Either> generateSummary(String mailId);
 }

@@ -90,4 +90,22 @@ class MailsRepositoryImpl extends MailsRepository {
       },
     );
   }
+
+  @override
+  Future<Either> generateSummary(String mailId) async {
+    Either result = await serviceLocator<MailsApiService>().generateSummary(mailId);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) async {
+        Response response = data;
+
+        MailModel mailModel = MailModel.fromMap(response.data);
+
+        MailEntity mailEntity = mailModel.toEntity();
+
+        return Right(mailEntity);
+      },
+    );
+  }
 }
