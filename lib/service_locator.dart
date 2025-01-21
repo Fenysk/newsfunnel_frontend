@@ -7,6 +7,7 @@ import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mail-details.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mails-from-address.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-user-mail-servers.usecase.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/mark-mail-read-state.usecase.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/repository/users.repository-impl.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/source/user-local.service.dart';
 import 'package:newsfunnel_frontend/features/user/1_data/source/users-api.service.dart';
@@ -68,4 +69,5 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton<GetMailsFromAddressUsecase>(GetMailsFromAddressUsecase());
   serviceLocator.registerSingleton<GetMailDetailsUsecase>(GetMailDetailsUsecase());
   serviceLocator.registerSingleton<DeleteMailUsecase>(DeleteMailUsecase());
+  serviceLocator.registerSingleton<MarkMailReadStateUsecase>(MarkMailReadStateUsecase());
 }

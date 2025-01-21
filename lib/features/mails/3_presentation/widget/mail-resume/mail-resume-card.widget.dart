@@ -51,7 +51,7 @@ class MailResumeCardWidget extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 8),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: mail.markdownSummary != null ? CupertinoColors.activeGreen : CupertinoColors.systemGrey,
+                            color: !mail.isRead ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
                           ),
                         ),
                         Expanded(
@@ -59,7 +59,7 @@ class MailResumeCardWidget extends StatelessWidget {
                             title ?? mail.subject ?? '(No subject)',
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: mail.isRead ? FontWeight.normal : FontWeight.bold,
                               color: CupertinoTheme.of(context).textTheme.textStyle.color,
                             ),
                             overflow: TextOverflow.ellipsis,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsfunnel_frontend/core/constants/app-icons.constants.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/page/mailbox.page.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/bloc/user-mail-servers-display.cubit.dart';
 import 'package:newsfunnel_frontend/features/mails/3_presentation/widget/mail-server/bloc/user-mail-servers-display.state.dart';
@@ -60,7 +61,7 @@ class MailServerClickableList extends StatelessWidget {
               return CupertinoListTile(
                 title: Text(mailServer.name),
                 subtitle: Text(mailServer.name),
-                trailing: const CupertinoListTileChevron(),
+                trailing: Icon(AppIcons.right),
                 onTap: () {
                   Navigator.of(context).push(
                     CupertinoPageRoute(

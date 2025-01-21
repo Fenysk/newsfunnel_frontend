@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/cupertino.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.usecase.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/mark-mail-read-state.usecase.dart';
 import 'package:newsfunnel_frontend/service_locator.dart';
 import 'package:newsfunnel_frontend/core/utils/markdown.util.dart';
 import 'package:newsfunnel_frontend/core/constants/app-icons.constants.dart';
@@ -25,6 +26,23 @@ class _MailDetailPageState extends State<MailDetailPage> {
   bool _areNotesExpanded = true;
   bool _isRawDataExpanded = false;
   Map<String, bool> _sectionExpanded = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _markAsRead();
+  }
+
+  Future<void> _markAsRead() async {
+    if (!widget.mail.isRead) {
+      await serviceLocator<MarkMailReadStateUsecase>().execute(
+        request: {
+          'mailId': widget.mail.id,
+          'isRead': true,
+        },
+      );
+    }
+  }
 
   void _showSettingsSheet(BuildContext context) {
     showCupertinoModalPopup(

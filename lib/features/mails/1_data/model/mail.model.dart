@@ -8,6 +8,7 @@ class MailModel {
   final String? subject;
   final String? body;
   final String? markdownSummary;
+  final bool isRead;
   final DateTime createdAt;
   final String mailServerId;
 
@@ -18,6 +19,7 @@ class MailModel {
     required this.subject,
     this.body,
     this.markdownSummary,
+    required this.isRead,
     required this.createdAt,
     required this.mailServerId,
   });
@@ -30,6 +32,7 @@ class MailModel {
       subject: map['subject'] as String?,
       body: map['body'] as String?,
       markdownSummary: map['markdownSummary'] as String?,
+      isRead: map['isRead'] as bool,
       createdAt: DateTime.parse(map['createdAt'] as String),
       mailServerId: map['mailServerId'] as String,
     );
@@ -43,6 +46,7 @@ class MailModel {
       'subject': subject,
       'body': body,
       'markdownSummary': markdownSummary,
+      'isRead': isRead,
       'createdAt': createdAt.toIso8601String(),
       'mailServerId': mailServerId,
     };
@@ -61,6 +65,7 @@ extension MailModelExtension on MailModel {
         subject: subject,
         body: body,
         markdownSummary: markdownSummary,
+        isRead: isRead,
         createdAt: createdAt,
         mailServerId: mailServerId,
       );

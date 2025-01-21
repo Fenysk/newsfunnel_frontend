@@ -72,4 +72,22 @@ class MailsRepositoryImpl extends MailsRepository {
       (data) => Right(data),
     );
   }
+
+  @override
+  Future<Either> markMailReadState(String mailId, bool isRead) async {
+    Either result = await serviceLocator<MailsApiService>().markMailReadState(mailId, isRead);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) async {
+        Response response = data;
+
+        MailModel mailModel = MailModel.fromMap(response.data);
+
+        MailEntity mailEntity = mailModel.toEntity();
+
+        return Right(mailEntity);
+      },
+    );
+  }
 }

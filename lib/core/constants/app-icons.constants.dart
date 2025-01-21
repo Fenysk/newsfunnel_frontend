@@ -15,4 +15,5 @@ class AppIcons {
   static final IconData close = Platform.isIOS ? CupertinoIcons.clear_circled_solid : Icons.close;
   static final IconData down = Platform.isIOS ? CupertinoIcons.chevron_down : Icons.keyboard_arrow_down;
   static final IconData right = Platform.isIOS ? CupertinoIcons.chevron_right : Icons.keyboard_arrow_right;
+  static final IconData unread = Platform.isIOS ? CupertinoIcons.envelope_badge : Icons.mark_email_unread;
 }
