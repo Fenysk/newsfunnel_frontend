@@ -4,6 +4,7 @@ import 'package:newsfunnel_frontend/features/mails/2_domain/entity/mail.entity.d
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/generate-summary.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/mark-mail-read-state.usecase.dart';
+import 'package:newsfunnel_frontend/features/mails/3_presentation/page/mail-original.page.dart';
 import 'package:newsfunnel_frontend/service_locator.dart';
 import 'package:newsfunnel_frontend/core/utils/markdown.util.dart';
 import 'package:newsfunnel_frontend/core/constants/app-icons.constants.dart';
@@ -26,7 +27,7 @@ class _MailDetailPageState extends State<MailDetailPage> {
   bool _areSectionsExpanded = true;
   bool _areNotesExpanded = true;
   bool _isRawDataExpanded = false;
-  Map<String, bool> _sectionExpanded = {};
+  final Map<String, bool> _sectionExpanded = {};
 
   @override
   void initState() {
@@ -390,6 +391,26 @@ class _MailDetailPageState extends State<MailDetailPage> {
               ],
             ),
           ),
+        ),
+        const SizedBox(height: 16),
+        CupertinoButton(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+          color: CupertinoTheme.of(context).primaryColor,
+          child: Text(
+            'Show Original',
+            style: TextStyle(
+              color: CupertinoColors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => MailOriginalPage(mail: widget.mail),
+              ),
+            );
+          },
         ),
       ],
     );
