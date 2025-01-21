@@ -19,6 +19,7 @@ class _MailServerCardWidgetState extends State<MailServerCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: CupertinoTheme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(12),

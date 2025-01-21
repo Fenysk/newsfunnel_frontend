@@ -108,4 +108,14 @@ class MailsRepositoryImpl extends MailsRepository {
       },
     );
   }
+
+  @override
+  Future<Either> unlinkMailServer(String emailAddress) async {
+    Either result = await serviceLocator<MailsApiService>().unlinkMailServer(emailAddress);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) => Right(data),
+    );
+  }
 }

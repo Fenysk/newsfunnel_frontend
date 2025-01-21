@@ -74,7 +74,6 @@ class ListMailsFromAddressWidget extends StatelessWidget {
   Widget buildFailureContent(UserMailsFromAddressFailure state) => Center(child: Text(state.errorMessage));
 
   Widget buildLoadedContent(BuildContext context, UserMailsFromAddressLoaded state) {
-    // Sort mails by unread first
     final sortedMails = [
       ...state.mails
     ]..sort((a, b) {

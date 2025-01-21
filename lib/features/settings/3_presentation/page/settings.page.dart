@@ -8,23 +8,28 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CupertinoNavigationBar(
-          leading: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: Icon(AppIcons.back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          middle: const Text('Settings'),
-          trailing: CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () => AddServerSheetWidget().show(context),
-            child: const Icon(CupertinoIcons.add),
-          ),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        leading: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: Icon(AppIcons.back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        const UserMailServersDisplayWidget(),
-      ],
+        middle: const Text('Settings'),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => AddServerSheetWidget().show(context),
+          child: const Icon(CupertinoIcons.add),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            UserMailServersDisplayWidget(),
+          ],
+        ),
+      ),
     );
   }
 }

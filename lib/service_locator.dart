@@ -3,6 +3,7 @@ import 'package:newsfunnel_frontend/features/auth/3_presentation/bloc/auth.cubit
 import 'package:newsfunnel_frontend/features/mails/1_data/repository/mails.repository-impl.dart';
 import 'package:newsfunnel_frontend/features/mails/1_data/source/mails-api.service.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/repository/mails.repository.dart';
+import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/unlink-mail-server.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/delete-mail.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/generate-summary.usecase.dart';
 import 'package:newsfunnel_frontend/features/mails/2_domain/usecase/get-mail-details.usecase.dart';
@@ -72,4 +73,5 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton<DeleteMailUsecase>(DeleteMailUsecase());
   serviceLocator.registerSingleton<MarkMailReadStateUsecase>(MarkMailReadStateUsecase());
   serviceLocator.registerSingleton<GenerateSummaryUsecase>(GenerateSummaryUsecase());
+  serviceLocator.registerSingleton<UnlinkMailServerUsecase>(UnlinkMailServerUsecase());
 }
